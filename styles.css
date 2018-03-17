@@ -36,6 +36,34 @@ h4 {
 	color: #fff;
 }
 
+.container {    
+    font-family: 'Bangers', cursive;
+	font-size: 1.5vw;
+	letter-spacing: 3px;
+	text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.7);
+	color: #fff;
+}
+
+input[type=text], select, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    resize: vertical;
+}
+
+input[type=submit] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
 
 p {
 	font-family: 'Antic';
@@ -50,6 +78,8 @@ dd p{
 	width: 500px;
 	border: 3px solid white; 
 }
+
+
 
 table, th, td {
 	text-align: center;
@@ -76,15 +106,18 @@ tr {
 
 tr:hover {background-color: #f5f5f5;}
 
+
+
 .floating-box {
     display: inline-block;
     width: 300px;
-	height: 300px;
+	height: 310px;
     margin: 10px;
     border: 3px solid white;  
 	overflow: auto;
 	padding-top: 50px;
 }
+
 
 article {
 	font-family: 'Bangers', cursive;
@@ -115,10 +148,57 @@ presentation {
 	font-size: 1.5vw;
 }
 
+
+
 .footer {
+	/*
    position: fixed;
    left: 0;
    bottom: 0;
    width: 100%;
    text-align: center;
+   */
+   
+    height:30px;
+	clear:both;
+	position:relative;
+	bottom:0;
+	width: 100%;
+    text-align: center;
+}
+
+.list-box {
+    clear: left;
+    margin-bottom: 10px;
+    border: 3px solid green;      
+}
+
+ul {
+    padding: 20px;
+}
+
+ul li {
+    padding: 5px;
+    margin-left: 35px;
+	font-family: 'Antic';
+	text-shadow: 0px 0px 0 rgba(0, 0, 0, 0);
+	color: #fff;
+	font-size: 1.5vw;
+}
+
+.button {
+    background-color: green;
+    border: none;
+    color: white;
+    padding: 8px 20px;
+    text-align: center;
+    font-size: 15px;
+    margin: 1px 1px;
+    cursor: pointer;
+}
+.floating-button {
+    background-color: solid green;
+    border: none;
+    text-align: center;
+    display: inline-block;
 }

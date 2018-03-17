@@ -16,25 +16,41 @@
 		<presentation>Another music lover! Welcome to the awesome club of having all of your beloved music in one place with 
 		integration from MusicBrainz!</presentation>
 	</div>
+	
+	
+	
 	<div class="column">
-		<h2>Login</h2>
+	<div class="container">
+	<h2>Login</h2>
+    <form action="userPage.html">
+    <label for="fname">Username</label>
+    <input type="text" id="fname" name="firstname" placeholder="Your username..">
 
-		<dt><h4>Username</h4></dt>
-		<dd><p contenteditable="true">  </p></dd>
-
-		<dt><h4>Password</h4></dt>
-		<dd><p contenteditable="true">  </p></dd>
+    <label for="lname">Email adress</label>
+    <input type="text" id="lname" name="lastname" placeholder="Your email adress..">
+	
+		<form method="get" action="userPage.html"><center>
+			<input type="submit" value="Sign in">
+		</center></form>
+		
 		  
-		<p> You don't have a user account?</p>
-		<form method="get" action="createAccount.html">
-			<button type="submit">Create user account</button>
-		</form>
-	</div>
+		<center><p style="font-family:Antic;"> You don't have a user account?</p></center>
+		<form method="get" action="createAccount.html"><center>
+			<input type="submit" value="Create user account">
+		</center></form>
+	
+	
+
+
+   
+  </form>
+  </div>
+  </div>
 	
 </div>  
 
 <div class="footer">
-  <p>© Andreea Ciobanu & Oana Florean 2017</p>
+  <p>© Andreea Ciobanu & Oana Florean 2018</p>
 </div>
 </body>
 </html>
