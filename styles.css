@@ -202,3 +202,20 @@ ul li {
     text-align: center;
     display: inline-block;
 }
+
+.search-p{
+	font-family: 'Antic';
+	color: #fff;
+	float: left;
+	font-size: 18px;
+	clear: both;
+	margin-left:10px;
+	margin-right:20px;
+	height:20px;
+	width: 150px;
+}
+
+.search-box{
+	width:200px;
+	float: left;
+}
