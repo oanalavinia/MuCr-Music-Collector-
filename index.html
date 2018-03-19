@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
+<title>HomePage</title>
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -22,28 +24,24 @@
 	<div class="column">
 	<div class="container">
 	<h2>Login</h2>
-    <form action="userPage.html">
+	
     <label for="fname">Username</label>
     <input type="text" id="fname" name="firstname" placeholder="Your username..">
 
     <label for="lname">Email adress</label>
     <input type="text" id="lname" name="lastname" placeholder="Your email adress..">
 	
-		<form method="get" action="userPage.html"><center>
-			<input type="submit" value="Sign in">
-		</center></form>
+		<form method="get" action="userPage.html">
+			<button type="submit" class="button">Sign in</button>
+		</form>
 		
 		  
-		<center><p style="font-family:Antic;"> You don't have a user account?</p></center>
-		<form method="get" action="createAccount.html"><center>
-			<input type="submit" value="Create user account">
-		</center></form>
-	
-	
-
-
+		<p style="font-family:Antic;"> You don't have a user account?</p>
+		
+		<form method="get" action="createAccount.html">
+			<button type="submit" class="button">Create user account</button>
+		</form>
    
-  </form>
   </div>
   </div>
 	
