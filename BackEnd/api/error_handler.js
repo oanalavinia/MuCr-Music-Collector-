@@ -30,6 +30,10 @@ var error = [
     {
         "code": 1007,
         "message": "Invalid credetials"
+    },
+    {
+        "code": 1008,
+        "message": "Esti deja in group"
     }
 ];
 

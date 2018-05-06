@@ -24,16 +24,29 @@ function join_group(env, req, callback) {
     var query = {
         user_uid: params.user_uid
     };
+    var queryGroup = {
+        user_uid: params.user_uid,
+        group_id: params.group_id
+    };
     var update = {
         $push: {group_id: params.group_id}
     };
-    env.mongo.collection('user_info').updateOne(query, update, (err, res) => {
+
+    env.mongo.collection('user_info').findOne(queryGroup, function (err, group_id) {
         if (err) { //eroare la search
             return callback(get_error(4));
         }
-        return callback(null, get_error(0));
-    });
-}
+
+        if (group_id && group_id !== undefined) {
+            return callback(get_error(8));
+        }
+
+        env.mongo.collection('user_info').updateOne(query, update, (err, res) => {
+            if (err) { return callback(get_error(4)); }
+            return callback(null, get_error(0));
+        });
+    })
+};
 
 module.exports = {
     register_group: register_group,
