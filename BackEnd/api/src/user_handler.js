@@ -71,8 +71,50 @@ function login_user(env, req, callback) {
 
 }
 
+function add_disc(env, req, callback) {
+    var params = req.params;
+    env.mongo.collection('disc').insertOne(params, (err, res) => {
+        if (err) { //eroare la search
+            return callback(get_error(4));
+        }
+        return callback(null, get_error(0));
+    });
+}
+
+function get_user_info(env, req, callback) {
+    var arr = req.url.split("/");
+    var user_id = arr[2];
+    var query = {
+        user_uid: user_id
+    };
+    env.mongo.collection('user_info').findOne(query, (err, res) => {
+        if (err) { //eroare la search
+            return callback(get_error(4));
+        }
+
+        if (!res || res === undefined) //nu exista userul
+            return callback(get_error(6));
+
+        env.mongo.collection('user_info').find(query).toArray((err, disc) => {
+            if (err) { //eroare la search
+                return callback(get_error(4));
+            }
+            if (!disc || disc === undefined) //nu exista userul
+                disc = [];
+            var resp = get_error(0);
+            resp.data = {
+                user_info: res,
+                disc: disc
+            };
+            return callback(null, resp);
+        });
+
+    });
+}
 
 module.exports = {
     register_user: register_user,
-    login_user: login_user
+    login_user: login_user,
+    add_disc: add_disc,
+    get_user_info: get_user_info
 };
