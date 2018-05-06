@@ -37,7 +37,7 @@ module.exports = {
         },
         "required": ["email", "pass"]
     },
-    "post.adddisc": {
+    "post.addisc": {
         "type": "object",
         "properties": {
             "token": {
