@@ -95,7 +95,7 @@ function get_user_info(env, req, callback) {
         if (!res || res === undefined) //nu exista userul
             return callback(get_error(6));
 
-        env.mongo.collection('user_info').find(query).toArray((err, disc) => {
+        env.mongo.collection('disc').find(query).toArray((err, disc) => {
             if (err) { //eroare la search
                 return callback(get_error(4));
             }
