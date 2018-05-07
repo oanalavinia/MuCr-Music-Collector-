@@ -7,14 +7,14 @@ function register_group(env, req, callback) {
     params.owner = params.user_uid;
     params.group_id = params.owner + Date.now();
     delete params.user_uid;
+    params.members = [];
+    params.members.push(params.owner);
     env.mongo.collection('groups').insertOne(params, (err, res) => {
         if (err) { //eroare la search
             return callback(get_error(4));
         }
-        //return callback(null, get_error(0));
         else {
-            req.params = {user_uid: params.owner, group_id: params.group_id};
-            return join_group(env, req, callback);
+            return callback(null, get_error(0));
         }
     });
 }
@@ -22,26 +22,26 @@ function register_group(env, req, callback) {
 function join_group(env, req, callback) {
     var params = req.params;
     var query = {
-        user_uid: params.user_uid
-    };
-    var queryGroup = {
-        user_uid: params.user_uid,
         group_id: params.group_id
     };
+    var queryGroup = {
+        group_id: params.group_id,
+        members: params.user_uid
+    };
     var update = {
-        $push: {group_id: params.group_id}
+        $push: {members: params.user_uid}
     };
 
-    env.mongo.collection('user_info').findOne(queryGroup, function (err, group_id) {
+    env.mongo.collection('groups').findOne(queryGroup, function (err, member) {
         if (err) { //eroare la search
             return callback(get_error(4));
         }
 
-        if (group_id && group_id !== undefined) {
+        if (member && member !== undefined) {
             return callback(get_error(8));
         }
 
-        env.mongo.collection('user_info').updateOne(query, update, (err, res) => {
+        env.mongo.collection('groups').updateOne(query, update, (err, res) => {
             if (err) { return callback(get_error(4)); }
             return callback(null, get_error(0));
         });
