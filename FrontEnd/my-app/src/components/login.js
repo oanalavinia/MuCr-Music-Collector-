@@ -44,7 +44,7 @@ export default class NameForm extends React.Component {
                 console.log(response);
                 alert(JSON.stringify(response.data));
                 if (response.data.token && response.data.token !== undefined) {
-                    this.setState({email: this.state.email, pass: this.state.value, raspLogin: 1});
+                    this.setState({email: this.state.email, pass: this.state.pass, raspLogin: 1});
                     alert("Login cu succes");
                     const cookies = new Cookies();
                     cookies.set('token', response.data.token, {path: '/'});

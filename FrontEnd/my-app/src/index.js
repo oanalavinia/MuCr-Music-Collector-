@@ -10,7 +10,7 @@ ReactDOM.render(
     <Router>
         <div>
             <Route exact path="/" component={login} />
-            <Route path="/getUser/:id" component={getuser} />
+            <Route path="/getUser/:id/:type?/:subtype?" component={getuser} />
         </div>
     </Router>,
     document.getElementById('root')
