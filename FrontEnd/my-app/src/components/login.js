@@ -44,7 +44,7 @@ export default class NameForm extends React.Component {
                 console.log(response);
                 alert(JSON.stringify(response.data));
                 if (response.data.token && response.data.token !== undefined) {
-                    this.setState({email: this.state.email, pass: this.state.pass, raspLogin: 1});
+                    this.setState({email: this.state.email, pass: this.state.pass, raspLogin: 1, user_uid:response.data.user_uid});
                     alert("Login cu succes");
                     const cookies = new Cookies();
                     cookies.set('token', response.data.token, {path: '/'});
@@ -66,7 +66,10 @@ export default class NameForm extends React.Component {
 
     render() {
         if (this.state.raspLogin === 1)
-            return <Redirect to='/getUser/a005b9cbc2f9d53d4db23b77715e11e1'/>;
+        {
+            const redirect_url='/getUser/'+this.state.user_uid;
+            return <Redirect to={redirect_url}/>;
+        }
         else
             return (
                 <div className="row">
@@ -101,7 +104,7 @@ export default class NameForm extends React.Component {
 
                             <p styles="font-family:Antic;"> You don't have a user account?</p>
 
-                            <form method="get" action="createAccount.html">
+                            <form method="get" action="register">
                                 <button type="submit" className="button">Create user account</button>
                             </form>
 

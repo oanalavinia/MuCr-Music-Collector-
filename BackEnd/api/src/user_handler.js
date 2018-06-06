@@ -9,8 +9,8 @@ function register_user(env, req, callback) {
     };
     var user_data = {
         email: params.email,
-        first_name: params.first_name,
-        last_name: params.last_name,
+        username: params.username,
+        city: params.city,
         user_uid: crypto.createHash('md5').update(params.email).digest('hex')
     };
     var user_login = {
@@ -65,7 +65,7 @@ function login_user(env, req, callback) {
                 return callback(get_error(4));
             }
             else
-                return callback(null, {token: doc.token});
+                return callback(null, {token: doc.token, user_uid: user.user_uid});
         })
     });
 

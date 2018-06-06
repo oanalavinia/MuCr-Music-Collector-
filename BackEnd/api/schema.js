@@ -2,11 +2,11 @@ module.exports = {
     "post.registeruser": {
         "type": "object",
         "properties": {
-            "first_name": {
+            "username": {
                 "type": "string",
                 "maxLength": 200
             },
-            "last_name": {
+            "city": {
                 "type": "string",
                 "maxLength": 200
             },
@@ -20,7 +20,7 @@ module.exports = {
                 "maxLength": 200
             }
         },
-        "required": ["first_name", "last_name", "email", "pass"]
+        "required": ["username", "city", "email", "pass"]
     },
     "post.loginuser": {
         "type": "object",
@@ -48,12 +48,12 @@ module.exports = {
                 "type": "string",
                 "maxLength": 200
             },
-            "author": {
+            "subtype": {
                 "type": "string",
                 "maxLength": 200
             }
         },
-        "required": ["token", "type", "author"]
+        "required": ["token", "type", "subtype"]
     },
     "post.registergroup": {
         "type": "object",
