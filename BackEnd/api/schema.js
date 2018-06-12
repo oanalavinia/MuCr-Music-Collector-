@@ -86,5 +86,38 @@ module.exports = {
             }
         },
         "required": ["token", "group_id"]
+    },
+    "post.getgroups": {
+        "type": "object",
+        "properties": {
+            "token": {
+                "type": "string",
+                "maxLength": 200
+            },
+            "req_type": {
+                "type": "string",
+                "maxLength": 200,
+                "enum": ["general", "group"]
+            },
+            "group_id": {
+                "type": "string",
+                "maxLength": 200
+            }
+        },
+        "required": ["token", "req_type"]
+    },
+    "post.getgroupinfo": {
+        "type": "object",
+        "properties": {
+            "token": {
+                "type": "string",
+                "maxLength": 200
+            },
+            "group_id": {
+                "type": "string",
+                "maxLength": 200
+            }
+        },
+        "required": ["token", "group_id"]
     }
 };

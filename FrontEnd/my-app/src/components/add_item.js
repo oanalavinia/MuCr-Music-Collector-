@@ -8,7 +8,7 @@ export default class add_item extends React.Component {
     constructor(props) {
         super(props);
         this.add_collections = this.add_collections.bind(this);
-        this.add_concerts=this.add_concerts.bind(this);
+        this.add_concerts = this.add_concerts.bind(this);
         this.manage_input = this.manage_input.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
 
@@ -18,13 +18,13 @@ export default class add_item extends React.Component {
             collections: this.add_collections,
             concerts: this.add_concerts
         };
-        const default_subtype={
-            collections:"vinyl",
-            concerts:"seen"
+        const default_subtype = {
+            collections: "vinyl",
+            concerts: "seen"
         };
         if (props.match.params.type && (props.match.params.type === "collections" || props.match.params.type === "concerts")) {
             this.type = props.match.params.type;
-            this.state={type:this.type, subtype:default_subtype[this.type]};
+            this.state = {type: this.type, subtype: default_subtype[this.type]};
             console.log(this.state);
             this.component = component_links[this.type]();
         }
@@ -117,13 +117,16 @@ export default class add_item extends React.Component {
                 </div>
 
                 <p className="insert-p">Format</p>
-                <input type="text" id="format" name="format" onChange={(e) => this.manage_input(e)} placeholder="Format.."/>
+                <input type="text" id="format" name="format" onChange={(e) => this.manage_input(e)}
+                       placeholder="Format.."/>
 
-                <p className="insert-p" >Gender</p>
-                <input type="text" id="gender" name="gender" onChange={(e) => this.manage_input(e)} placeholder="Gender.."/>
+                <p className="insert-p">Gender</p>
+                <input type="text" id="gender" name="gender" onChange={(e) => this.manage_input(e)}
+                       placeholder="Gender.."/>
 
                 <p className="insert-p">Artists</p>
-                <input type="text" id="artists" name="artists" onChange={(e) => this.manage_input(e)} placeholder="Artists.."/>
+                <input type="text" id="artists" name="artists" onChange={(e) => this.manage_input(e)}
+                       placeholder="Artists.."/>
 
                 <p className="insert-p">Year</p>
                 <input type="text" id="year" name="year" onChange={(e) => this.manage_input(e)} placeholder="Year.."/>
@@ -140,9 +143,9 @@ export default class add_item extends React.Component {
         let params = this.state;
 
 
-        let insert_data={
-            token:this.cookies.get("token"),
-            type:this.state.type,
+        let insert_data = {
+            token: this.cookies.get("token"),
+            type: this.state.type,
             subtype: this.state.subtype,
             data: params
         };
@@ -159,21 +162,12 @@ export default class add_item extends React.Component {
             .then((response) => {
                 console.log(response);
                 alert(JSON.stringify(response.data));
-                if (response.data.token && response.data.token !== undefined) {
-                    this.setState({
-                        email: this.state.email,
-                        pass: this.state.pass,
-                        raspLogin: 1,
-                        user_uid: response.data.user_uid
-                    });
-                    alert("Login cu succes");
-                    const cookies = new Cookies();
-                    cookies.set('token', response.data.token, {path: '/'});
-                    //this.props.history.push("/getUser/a005b9cbc2f9d53d4db23b77715e11e1");
-                    //return <Redirect to='/getUser/a005b9cbc2f9d53d4db23b77715e11e1'  />
+                if (response.data.code && response.data.code === 1000) {
+                    let current_state={type:insert_data.type, subtype:insert_data.subtype,add_item_id:this.cookies.get("user_uid")};
+                    this.setState(current_state);
                 }
                 else {
-                    alert("Invalid login");
+                    alert("Invalid data");
                 }
 
             })
@@ -186,6 +180,11 @@ export default class add_item extends React.Component {
 
 
     render() {
+        if (this.state.add_item_id && this.state.add_item_id !== undefined) {
+            let redirect_url = "/getUser/" + this.state.add_item_id + "/" + this.state.type + "/" + this.state.subtype;
+            return <Redirect to={redirect_url}/>;
+        }
+
         return (<div>{this.component}</div>)
     }
 }

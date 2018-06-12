@@ -183,6 +183,9 @@ export default class get_user extends React.Component {
                             className="button">Compact
                         cassette
                     </button>
+                    <form action="/addItem/collections">
+                        <button className="button">Add to collections</button>
+                    </form>
                 </div>
 
                 <div className="floating-box"><h2>Concerts</h2>
@@ -197,6 +200,9 @@ export default class get_user extends React.Component {
                             className="button">
                         Autographs
                     </button>
+                    <form action="/addItem/concerts/">
+                        <button className="button">Add to concerts</button>
+                    </form>
                 </div>
 
                 <div className="floating-box"><h2>Groups</h2>

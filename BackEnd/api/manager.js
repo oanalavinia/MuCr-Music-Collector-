@@ -56,7 +56,7 @@ function proxy_post(env, req, cb) {
     var arr = req.url.split("/");
     var request_id = method + "." + arr[1];
     request_id = request_id.toLowerCase();
-    var auth_method = ["post.addisc", "post.registergroup", "post.joingroup"];
+    var auth_method = ["post.addisc", "post.registergroup", "post.joingroup", "post.getgroups", "post.getgroupinfo"];
     var body = [];
     req.on('data', function (chunk) {
         body.push(chunk);
@@ -90,21 +90,25 @@ function proxy_post(env, req, cb) {
 }
 
 
-var routes = {
+const routes = {
     "post.registeruser": proxy_post, //user.register_user
     "post.loginuser": proxy_post,
     "post.addisc": proxy_post,
     "post.registergroup": proxy_post,
     "post.joingroup": proxy_post,
-    "get.user": user.get_user_info
+    "get.user": user.get_user_info,
+    "post.getgroups":proxy_post,
+    "post.getgroupinfo":proxy_post
 };
 
-var post_routes = {
+const post_routes = {
     "post.registeruser": user.register_user,
     "post.loginuser": user.login_user,
     "post.addisc": user.add_disc,
     "post.registergroup": group.register_group,
-    "post.joingroup": group.join_group
+    "post.joingroup": group.join_group,
+    "post.getgroups": group.get_groups,
+    "post.getgroupinfo":group.get_info_group
 };
 
 
