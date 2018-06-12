@@ -48,6 +48,7 @@ export default class NameForm extends React.Component {
                     alert("Login cu succes");
                     const cookies = new Cookies();
                     cookies.set('token', response.data.token, {path: '/'});
+                    cookies.set("user_uid",response.data.user_uid,{path:'/'});
                     //this.props.history.push("/getUser/a005b9cbc2f9d53d4db23b77715e11e1");
                     //return <Redirect to='/getUser/a005b9cbc2f9d53d4db23b77715e11e1'  />
                 }

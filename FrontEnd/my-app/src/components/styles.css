@@ -16,6 +16,9 @@ h1 {
   transform: skew(0, -5deg);
 }
 
+img {
+    height: 1.8vw;
+}
 h2 {
   text-align: center;
   font-weight: normal;
@@ -55,17 +58,6 @@ input[type=text], select, textarea {
     resize: vertical;
 }
 
-input[type=password], select, textarea {
-    width: 100%;
-    padding: 1vw;
-    border: 1px solid #ccc;
-    border-radius: 3vw;
-    box-sizing: border-box;
-    margin-top: 0.5vw;
-    margin-bottom: 0.4vw;
-    resize: vertical;
-}
-
 input[type=submit] {
     background-color: #4CAF50;
     color: white;
@@ -91,9 +83,7 @@ dd p{
 	border: 3px solid white; 
 }
 
-table {
-    width:100%
-}
+
 
 table, th, td {
 	text-align: center;
@@ -126,7 +116,7 @@ tr:hover {background-color: #f5f5f5;}
     display: inline-block;
 	text-align:center;
     width: 22vw;
-	height: 25vw;
+	height: 27vw;
     margin: 0.5vw;
     border: 0.3vw solid white;  
 	overflow: auto;
@@ -217,6 +207,21 @@ ul li {
     display: inline-block;
 }
 
+.insert-p{
+	font-family: 'Antic';
+	color: #fff;
+	float: left;
+	font-size: 1.5vw;
+	clear: both;
+	margin-left:2vw;
+	height:1vw;
+	width: 300px;
+}
+
+.small-input{
+    width: 300px;
+}
+
 .search-p{
 	font-family: 'Antic';
 	color: #fff;
@@ -227,6 +232,7 @@ ul li {
 	height:1vw;
 	width: 6vw;
 }
+
 
 .search-box{
 	width:15vw;

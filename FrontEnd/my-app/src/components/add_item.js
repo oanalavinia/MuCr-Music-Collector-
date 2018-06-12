@@ -36,7 +36,7 @@ export default class add_item extends React.Component {
     }
 
     manage_input(event) {
-        console.log(this.state);
+        //console.log(this.state);
         let inputs = this.state;
         inputs[event.target.name] = event.target.value;
         this.setState(inputs);

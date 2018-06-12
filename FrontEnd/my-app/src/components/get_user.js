@@ -11,6 +11,18 @@ export default class get_user extends React.Component {
         this.state = {table_data: []};
         this.all_disc = [];
         this.query_disc = {};
+
+        this.db_asoc={
+            artistName:"Artist",
+            albumName:"Album",
+            diameter: "Diameter (inch)",
+            rotationaSpeed: "Rotational speerd(rpm)",
+            nrChanels:"Number of audio channels",
+            weight:"Weight(G)",
+            seniority:"Seniority",
+            quality:"Quality",
+            mbid:"Music brainz info"
+        };
         ///this.componentDidMount=this.componentDidMount.bind(this);
         this.change_params = this.change_params.bind(this);
 
@@ -53,13 +65,14 @@ export default class get_user extends React.Component {
     generate_table(disc) {
         // console.log("Discurile sunt: ");
         // console.log(disc);
+        let logo_mb="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/MusicBrainz_Logo_2016.svg/1200px-MusicBrainz_Logo_2016.png";
         let keys = [];
         if (disc && disc !== undefined && disc.length > 0)
             keys = _.keys(disc[0].data);
         else
             keys = [];
         let head_table = keys.map((item) =>
-            <th>{item}</th>
+            <th>{this.db_asoc[item]}</th>
         );
         // let listItems = disc.map((item) =>
         //     <tr>
@@ -70,9 +83,17 @@ export default class get_user extends React.Component {
         let listItems = disc.map((item) =>
             <tr>
                 {
-                    keys.map((atr) =>
-                        <td>{item['data'][atr]}</td>
-                    )
+                    keys.map((atr) =>{
+                        if (item['data'][atr]===undefined)
+                            return (<td></td>);
+                        if(atr!=="mbid")
+                            return (<td>{item['data'][atr]}</td>);
+                        else
+                        {
+                            let link="https://musicbrainz.org/release/"+item['data'][atr];
+                            return (<td><a href={link}> <img src={logo_mb} alt="logo"/>  </a></td>);
+                        }
+                    })
                 }
             </tr>
         );
@@ -206,7 +227,7 @@ export default class get_user extends React.Component {
                 </div>
 
                 <div className="floating-box"><h2>Groups</h2>
-                    <form method="get" action="myGroups.html">
+                    <form method="get" action="/getGroups/">
                         <button type="submit" className="button">My groups</button>
                     </form>
                     <form method="get" action="createGroup.html">
@@ -228,11 +249,13 @@ export default class get_user extends React.Component {
         if (this.params.type && !this.params.subtype) {
             this.search_box = this.search_form(this.params.type);
         }
-
+        let style100={
+            width:"100%"
+        };
         return (
             <div>
                 {this.search_box}
-                <table>
+                <table style={style100}>
                     <tbody>
                     <tr>
                         {this.state.head_table}

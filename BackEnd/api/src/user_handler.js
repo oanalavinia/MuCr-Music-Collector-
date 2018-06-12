@@ -1,6 +1,7 @@
 const get_error = require('../error_handler').get_error,
     crypto = require('crypto'),
-    randomstring = require('randomstring');
+    randomstring = require('randomstring'),
+    get_mbid=require('./music_brainz').get_mbid;
 
 function register_user(env, req, callback) {
     var params = req.params;
@@ -72,13 +73,26 @@ function login_user(env, req, callback) {
 }
 
 function add_disc(env, req, callback) {
-    var params = req.params;
-    env.mongo.collection('disc').insertOne(params, (err, res) => {
-        if (err) { //eroare la search
-            return callback(get_error(4));
-        }
-        return callback(null, get_error(0));
-    });
+    const params = req.params;
+
+    if (params.type === "collections")
+        return get_mbid(params.data.albumName, params.data.artistName, (err, id) => {
+            if (id && id !== undefined)
+                params.data.mbid = id;
+            insert(params, callback);
+        });
+    else
+        return insert(params, callback);
+
+    function insert(params, callback) {
+        env.mongo.collection('disc').insertOne(params, (err, res) => {
+            if (err) { //eroare la search
+                return callback(get_error(4));
+            }
+            return callback(null, get_error(0));
+        });
+    }
+
 }
 
 function get_user_info(env, req, callback) {
