@@ -83,7 +83,6 @@ export default class get_group_info extends React.Component {
                 }
             </tr>
         );
-        //alert(JSON.stringify(listItems));
         this.setState({table_data: listItems, head_table: head_table})
     }
 
@@ -100,20 +99,14 @@ export default class get_group_info extends React.Component {
         axios.post(data.url, data.body)
             .then((response) => {
                 if (response.data.code && response.data.code === 1000) {
-                    alert(response.data);
                     this.all_disc = response.data.disc;
                     this.name = response.data.name;
                     this.description = response.data.description;
                     this.change_params({type: this.params.type, subtype: this.params.subtype}, null);
                 }
-
-                //this.generate_table(disc);
-                //alert(this.state);
-
             })
             .catch((error) => {
                 console.log(error);
-                //alert(JSON.stringify(error));
             });
 
     }

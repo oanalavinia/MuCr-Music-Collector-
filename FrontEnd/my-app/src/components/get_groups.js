@@ -43,7 +43,6 @@ export default class get_groups extends React.Component {
 
         axios.post(data.url, data.body)
             .then((response) => {
-                alert(JSON.stringify(response.data));
                 if (response.data.code && response.data.code === 1000) {
                     this.componentDidMount();
                 }
@@ -54,7 +53,6 @@ export default class get_groups extends React.Component {
             })
             .catch((error) => {
                 console.log(error);
-                //alert(JSON.stringify(error));
             });
     }
 
@@ -154,7 +152,6 @@ export default class get_groups extends React.Component {
 
         axios.post(data.url, data.body)
             .then((response) => {
-                alert(JSON.stringify(response.data));
                 if (response.data.code && response.data.code === 1000) {
                     this.role = [{
                         first: false, message: "Groups you are the owner of:"
@@ -168,7 +165,6 @@ export default class get_groups extends React.Component {
                     this.get_elements(response.data.data);
                     // let current_state={type:insert_data.type, subtype:insert_data.subtype,add_item_id:this.cookies.get("user_uid")};
                     // this.setState(current_state);
-                    alert("Ok");
                 }
                 else {
                     alert("Invalid data");
@@ -177,7 +173,6 @@ export default class get_groups extends React.Component {
             })
             .catch((error) => {
                 console.log(error);
-                //alert(JSON.stringify(error));
             });
 
     }

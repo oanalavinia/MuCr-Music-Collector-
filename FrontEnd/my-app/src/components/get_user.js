@@ -47,10 +47,10 @@ export default class get_user extends React.Component {
                 if (disc.subtype !== query.subtype)
                     ok = false;
             if (query.artist && query.artist !== undefined)
-                if (disc['data']['artist'].indexOf(query.artist) < 0)
+                if (disc['data']['artistName'].indexOf(query.artist) < 0)
                     ok = false;
             if (query.album && query.album !== undefined)
-                if (disc['data']['album'].indexOf(query.album) < 0)
+                if (disc['data']['albumName'].indexOf(query.album) < 0)
                     ok = false;
 
             return ok;
@@ -97,7 +97,6 @@ export default class get_user extends React.Component {
                 }
             </tr>
         );
-        //alert(JSON.stringify(listItems));
         this.setState({table_data: listItems, head_table: head_table})
     }
 
@@ -109,14 +108,9 @@ export default class get_user extends React.Component {
                 this.all_disc = response.data.data.disc;
                 if (this.params.type)
                     this.change_params({type: this.params.type, subtype: this.params.subtype}, null);
-
-                //this.generate_table(disc);
-                //alert(this.state);
-
             })
             .catch((error) => {
                 console.log(error);
-                //alert(JSON.stringify(error));
             });
 
     }
@@ -236,10 +230,10 @@ export default class get_user extends React.Component {
                 </div>
 
                 <div className="floating-box"><h2>Search</h2>
-                    <form action="collections/">
+                    <form onSubmit ={(e) => this.change_params({type: "collections"}, e)}>
                         <button className="button">Search in collections</button>
                     </form>
-                    <form action="concerts/">
+                    <form onSubmit ={(e) => this.change_params({type: "concerts"}, e)}>
                         <button type="submit" className="button">Search in concerts</button>
                     </form>
                 </div>
