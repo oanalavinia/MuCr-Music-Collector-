@@ -1,7 +1,8 @@
 const get_error = require('../error_handler').get_error,
     crypto = require('crypto'),
     randomstring = require('randomstring'),
-    get_mbid=require('./music_brainz').get_mbid;
+    get_mbid=require('./music_brainz').get_mbid,
+	ObjectId=require('mongodb').ObjectID;
 
 function register_user(env, req, callback) {
     var params = req.params;
@@ -126,9 +127,24 @@ function get_user_info(env, req, callback) {
     });
 }
 
+function delete_item(env, req, callback) {
+    const query = {
+        user_uid: req.params.user_uid,
+        _id: ObjectId(req.params.item_id)
+    };
+    env.mongo.collection('disc').deleteOne(query, (err, res) => {
+        if (err) { //eroare la search
+            return callback(get_error(4));
+        }
+        else
+            return callback(null, get_error(0));
+    });
+}
+
 module.exports = {
     register_user: register_user,
     login_user: login_user,
     add_disc: add_disc,
-    get_user_info: get_user_info
+    get_user_info: get_user_info,
+	delete_item:delete_item
 };

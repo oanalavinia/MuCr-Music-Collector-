@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import axios from "axios";
 import "./styles.css";
 import _ from "lodash";
+import Cookies from "universal-cookie";
 
 export default class get_user extends React.Component {
     constructor(props) {
@@ -11,6 +12,7 @@ export default class get_user extends React.Component {
         this.state = {table_data: []};
         this.all_disc = [];
         this.query_disc = {};
+		this.cookies = new Cookies();
 
         this.db_asoc={
             artistName:"Artist",
@@ -21,20 +23,15 @@ export default class get_user extends React.Component {
             weight:"Weight(G)",
             seniority:"Seniority",
             quality:"Quality",
-            mbid:"Music brainz info"
+            mbid:"Music brainz info",
+			Actions:"Actions"
         };
-        ///this.componentDidMount=this.componentDidMount.bind(this);
         this.change_params = this.change_params.bind(this);
 
 
     }
 
     change_params(query, e) {
-        // let query={};
-        // if(type && type!==undefined)
-        //     query.type=type;
-        // if(subtype && subtype!==undefined)
-        //     query.subtype=subtype;
         this.query_disc = query;
         this.params.type = query.type || undefined;
         this.params.subtype = query.subtype || undefined;
@@ -58,32 +55,57 @@ export default class get_user extends React.Component {
 
         });
         this.generate_table(current_item);
-        //this.generate_table(this.all_disc);
-        //this.forceUpdate();
+    }
+	
+	delete_item(item_id, event) {
+        event.preventDefault();
+        let params = {
+            token: this.cookies.get("token"),
+            item_id: item_id
+        };
+        const data = {
+            url: "http://127.0.0.1:1234/deleteitem/",
+            body: JSON.stringify(params)
+        };
+
+        axios.post(data.url, data.body)
+            .then((response) => {
+                alert(JSON.stringify(response.data));
+                if (response.data.code && response.data.code === 1000) {
+                    this.componentDidMount();
+                }
+                else {
+                    alert("Invalid data");
+                }
+
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     }
 
     generate_table(disc) {
-        // console.log("Discurile sunt: ");
-        // console.log(disc);
         let logo_mb="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/MusicBrainz_Logo_2016.svg/1200px-MusicBrainz_Logo_2016.png";
-        let keys = [];
-        if (disc && disc !== undefined && disc.length > 0)
+        let delete_item_img="https://cdn2.iconfinder.com/data/icons/media-and-navigation-buttons-round/512/Button_12-512.png";
+		let keys = [];
+        if (disc && disc !== undefined && disc.length > 0) {
             keys = _.keys(disc[0].data);
+            if(this.cookies.get("token") && this.cookies.get("token")!==undefined && disc[0]['user_uid']===this.cookies.get("user_uid"))
+                keys.push("Actions");
+        }
         else
             keys = [];
         let head_table = keys.map((item) =>
             <th>{this.db_asoc[item]}</th>
         );
-        // let listItems = disc.map((item) =>
-        //     <tr>
-        //         <td>{item.type}</td>
-        //         <td>{item.author}</td>
-        //     </tr>
-        // );
+		
+		alert(JSON.stringify(disc[0]));
         let listItems = disc.map((item) =>
             <tr>
                 {
                     keys.map((atr) =>{
+						if(atr==="Actions")
+                            return (<td><img src={delete_item_img} alt="logo" onClick={(e) => this.delete_item(item['_id'], e)} /> </td>);
                         if (item['data'][atr]===undefined)
                             return (<td></td>);
                         if(atr!=="mbid")
@@ -117,7 +139,6 @@ export default class get_user extends React.Component {
 
     handleChange_subtype(event) {
         let query = this.query_disc;
-        //query.type=this.params.type;
         query.subtype = event.target.value;
         this.change_params(query, null);
     }

@@ -119,5 +119,19 @@ module.exports = {
             }
         },
         "required": ["token", "group_id"]
+    },
+	"post.deleteitem": {
+        "type": "object",
+        "properties": {
+            "token": {
+                "type": "string",
+                "maxLength": 200
+            },
+            "item_id": {
+                "type": "string",
+                "maxLength": 200
+            }
+        },
+        "required": ["token", "item_id"]
     }
 };
