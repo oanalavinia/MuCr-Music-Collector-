@@ -122,7 +122,16 @@ export default class get_user extends React.Component {
                 }
             </tr>
         );
-        this.setState({table_data: listItems, head_table: head_table})
+
+        let box;
+
+        if (disc[0] && disc[0]!== undefined)
+            box = (<div className = "list-box">
+                <ul>
+                    <li><b>Type:</b>{disc[0].subtype}</li>
+                </ul>
+                </div> )
+        this.setState({table_data: listItems, head_table: head_table, box: box})
     }
 
     componentDidMount() {
@@ -277,6 +286,7 @@ export default class get_user extends React.Component {
         };
         return (
             <div>
+                {this.state.box}
                 {this.search_box}
                 <table style={style100}>
                     <tbody>
