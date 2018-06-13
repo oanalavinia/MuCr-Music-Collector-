@@ -2,7 +2,8 @@ const get_error = require('../error_handler').get_error,
     crypto = require('crypto'),
     randomstring = require('randomstring'),
     get_mbid=require('./music_brainz').get_mbid,
-	ObjectId=require('mongodb').ObjectID;
+	ObjectId=require('mongodb').ObjectID,
+    salt = "security0*0Salt";
 
 function register_user(env, req, callback) {
     var params = req.params;
@@ -13,11 +14,11 @@ function register_user(env, req, callback) {
         email: params.email,
         username: params.username,
         city: params.city,
-        user_uid: crypto.createHash('md5').update(params.email).digest('hex')
+        user_uid: crypto.createHash('sha256', salt).update(params.email).digest('hex')
     };
     var user_login = {
         email: params.email,
-        pass: crypto.createHash('md5').update(params.pass).digest('hex'),
+        pass: crypto.createHash('sha256', salt).update(params.pass).digest('hex'),
         user_uid: user_data.user_uid
     };
     env.mongo.collection('user_info').findOne(query, function (err, user) {
@@ -48,7 +49,7 @@ function login_user(env, req, callback) {
     var params = req.params;
     var query = {
         email: params.email,
-        pass: crypto.createHash('md5').update(params.pass).digest('hex')
+        pass: crypto.createHash('sha256', salt).update(params.pass).digest('hex')
     };
     env.mongo.collection('user_login').findOne(query, function (err, user) {
         if (err) { //eroare la search
