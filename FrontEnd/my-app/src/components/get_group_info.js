@@ -25,7 +25,6 @@ export default class get_group_info extends React.Component {
             mbid: "Music brainz info",
             format:"Format",
             gender:"Gender",
-            artists:"Artists",
             year:"Year",
             city:"City",
             owner_name: "Owner"

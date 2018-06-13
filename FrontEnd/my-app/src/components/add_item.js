@@ -124,7 +124,7 @@ export default class add_item extends React.Component {
                        placeholder="Gender.."/>
 
                 <p className="insert-p">Artists</p>
-                <input type="text" id="artists" name="artists" onChange={(e) => this.manage_input(e)}
+                <input type="text" id="artistName" name="artistName" onChange={(e) => this.manage_input(e)}
                        placeholder="Artists.."/>
 
                 <p className="insert-p">Year</p>

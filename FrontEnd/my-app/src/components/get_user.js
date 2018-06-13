@@ -26,7 +26,6 @@ export default class get_user extends React.Component {
             mbid:"Music brainz info",
             format:"Format",
             gender:"Gender",
-            artists:"Artists",
             year:"Year",
             city:"City",
 			Actions:"Actions"
@@ -49,10 +48,16 @@ export default class get_user extends React.Component {
             if (query.artist && query.artist !== undefined)
                 if (disc['data']['artistName'].indexOf(query.artist) < 0)
                     ok = false;
-            if (query.album && query.album !== undefined)
-                if (disc['data']['albumName'].indexOf(query.album) < 0)
-                    ok = false;
-
+            if (query.type === "collections") {
+                if (query.album && query.album !== undefined)
+                    if (disc['data']['albumName'].indexOf(query.album) < 0)
+                        ok = false;
+            }
+            else {
+                if (query.album && query.album !== undefined)
+                    if (disc['data']['format'].indexOf(query.album) < 0)
+                        ok = false;
+            }
             return ok;
         });
         this.generate_table(current_item);
@@ -111,7 +116,7 @@ export default class get_user extends React.Component {
                         else
                         {
                             let link="https://musicbrainz.org/release/"+item['data'][atr];
-                            return (<td><a href={link}> <img src={logo_mb} alt="logo"/>  </a></td>);
+                            return (<td><a href={link} target="_blank"> <img src={logo_mb} alt="logo"/>  </a></td>);
                         }
                     })
                 }
