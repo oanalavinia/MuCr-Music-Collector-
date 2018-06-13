@@ -14,6 +14,7 @@ h1 {
   font-family: 'Bangers', cursive;
   text-shadow: 0.4vw 0.4vw 0 rgba(0, 0, 0, 0.7);
   transform: skew(0, -5deg);
+  position:relative;
 }
 
 img {
@@ -39,6 +40,20 @@ h4 {
 	color: #fff;
 }
 
+.back {
+    background-color: green;
+    border: none;
+    color: white;
+    padding: 1vw 1vw;
+    text-align: center;
+    font-size: 1vw;
+    cursor: pointer;
+    top: 8px;
+    right: 16px;
+    position: absolute;
+    margin-top: 80px;
+}
+
 .container {    
     font-family: 'Bangers', cursive;
 	font-size: 1.5vw;
@@ -48,6 +63,17 @@ h4 {
 }
 
 input[type=text], select, textarea {
+    width: 100%;
+    padding: 1vw;
+    border: 1px solid #ccc;
+    border-radius: 3vw;
+    box-sizing: border-box;
+    margin-top: 0.5vw;
+    margin-bottom: 0.4vw;
+    resize: vertical;
+}
+
+input[type=password]{
     width: 100%;
     padding: 1vw;
     border: 1px solid #ccc;

@@ -10,6 +10,7 @@ import getuser from './components/get_user'
 import add_item from './components/add_item'
 import get_group_info from './components/get_group_info'
 import create_group from './components/create_group'
+import logout from './components/logout'
 import './index.css';
 ReactDOM.render(
     <Router>
@@ -21,6 +22,7 @@ ReactDOM.render(
             <Route exact path="/getGroups/" component={get_groups} />
             <Route path="/getGroupInfo/:id/:type/:subtype" component={get_group_info} />
 			<Route path="/createGroup/" component={create_group}/>
+            <Route path="/logout/" component={logout}/>
         </div>
     </Router>,
     document.getElementById('root')
