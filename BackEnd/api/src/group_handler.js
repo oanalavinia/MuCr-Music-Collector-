@@ -141,7 +141,7 @@ function get_info_group(env, req, callback) {
 }
 
 function processing_user_info(info) {
-    const name = info.user_info.first_name + " " + info.user_info.last_name;
+    const name = info.user_info.username;
     return info.disc.map((disc_item) => {
         disc_item.data['owner_name'] = name;
         return disc_item;

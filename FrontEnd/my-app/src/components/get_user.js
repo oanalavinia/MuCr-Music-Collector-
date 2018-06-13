@@ -224,7 +224,7 @@ export default class get_user extends React.Component {
                     <form method="get" action="/getGroups/">
                         <button type="submit" className="button">My groups</button>
                     </form>
-                    <form method="get" action="createGroup.html">
+                    <form method="get" action="/createGroup/">
                         <button type="submit" className="button">Create group</button>
                     </form>
                 </div>
