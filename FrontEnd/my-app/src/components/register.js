@@ -13,15 +13,13 @@ export default class Register extends React.Component {
             pass: '',
             raspRegister: 0
         };
-
-
+		
         this.handleChangePass = this.handleChangePass.bind(this);
         this.handleChangeEmail = this.handleChangeEmail.bind(this);
         this.handleUsername = this.handleUsername.bind(this);
         this.handleCity = this.handleCity.bind(this);
 
         this.handleSubmit = this.handleSubmit.bind(this);
-
     }
 
     handleChangeEmail(event) {
@@ -74,9 +72,7 @@ export default class Register extends React.Component {
         };
         axios.post(data.url, data.body)
             .then((response) => {
-                alert(JSON.stringify(response.data));
                 if (response.data.code && response.data.code === 1000) {
-                    alert("Register cu succes");
                     this.setState({
                         email: this.state.email,
                         pass: this.state.pass,

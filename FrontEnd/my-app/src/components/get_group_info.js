@@ -17,19 +17,20 @@ export default class get_group_info extends React.Component {
             artistName: "Artist",
             albumName: "Album",
             diameter: "Diameter (inch)",
-            rotationaSpeed: "Rotational speerd(rpm)",
+            rotationaSpeed: "Rotational speed(rpm)",
             nrChanels: "Number of audio channels",
             weight: "Weight(G)",
             seniority: "Seniority",
             quality: "Quality",
             mbid: "Music brainz info",
+            format:"Format",
+            gender:"Gender",
+            artists:"Artists",
+            year:"Year",
+            city:"City",
             owner_name: "Owner"
         };
-
-        ///this.componentDidMount=this.componentDidMount.bind(this);
         this.change_params = this.change_params.bind(this);
-
-
     }
 
     change_params(query, e) {
@@ -38,13 +39,9 @@ export default class get_group_info extends React.Component {
         this.params.subtype = query.subtype || undefined;
         let current_item = _.filter(this.all_disc, {type: this.params.type, subtype: this.params.subtype});
         this.generate_table(current_item);
-        //this.generate_table(this.all_disc);
-        //this.forceUpdate();
     }
 
     generate_table(disc) {
-        // console.log("Discurile sunt: ");
-        // console.log(disc);
         let keys = [];
         let logo_mb = "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/MusicBrainz_Logo_2016.svg/1200px-MusicBrainz_Logo_2016.png";
 
@@ -55,12 +52,7 @@ export default class get_group_info extends React.Component {
         let head_table = keys.map((item) =>
             <th>{this.db_asoc[item]}</th>
         );
-        // let listItems = disc.map((item) =>
-        //     <tr>
-        //         <td>{item.type}</td>
-        //         <td>{item.author}</td>
-        //     </tr>
-        // );
+      
         let listItems = disc.map((item) =>
             <tr>
                 {
@@ -110,8 +102,7 @@ export default class get_group_info extends React.Component {
             });
 
     }
-
-
+	
     render() {
         let style100 = {
             width: "100%"

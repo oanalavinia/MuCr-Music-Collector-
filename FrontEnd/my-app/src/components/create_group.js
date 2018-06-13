@@ -42,7 +42,6 @@ export default class create_group extends React.Component {
         axios.post(data.url, data.body)
             .then((response) => {
                 console.log(response);
-                alert(JSON.stringify(response.data));
                 if (response.data.code && response.data.code === 1000) {
                     let current_state = this.state;
                     current_state.add_item_id=this.cookies.get("user_uid");

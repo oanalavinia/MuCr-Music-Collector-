@@ -36,7 +36,6 @@ export default class add_item extends React.Component {
     }
 
     manage_input(event) {
-        //console.log(this.state);
         let inputs = this.state;
         inputs[event.target.name] = event.target.value;
         this.setState(inputs);
@@ -161,7 +160,6 @@ export default class add_item extends React.Component {
         axios.post(data.url, data.body)
             .then((response) => {
                 console.log(response);
-                alert(JSON.stringify(response.data));
                 if (response.data.code && response.data.code === 1000) {
                     let current_state={type:insert_data.type, subtype:insert_data.subtype,add_item_id:this.cookies.get("user_uid")};
                     this.setState(current_state);
@@ -181,7 +179,7 @@ export default class add_item extends React.Component {
 
     render() {
         if (this.state.add_item_id && this.state.add_item_id !== undefined) {
-            let redirect_url = "/getUser/" + this.state.add_item_id + "/" + this.state.type + "/" + this.state.subtype;
+            let redirect_url = "/getUser/" + this.state.add_item_id + "/";
             return <Redirect to={redirect_url}/>;
         }
 

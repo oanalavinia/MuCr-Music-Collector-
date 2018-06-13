@@ -122,7 +122,7 @@ export default class get_groups extends React.Component {
                         </form>
                     </div>
                     <div className="floating-button">
-                        <form method="get" action={link_button.concerts.tickets}>
+                        <form method="get" action={link_button.concerts.autographs}>
                             <button type="submit" className="button">Autographs</button>
                         </form>
                     </div>
@@ -163,8 +163,6 @@ export default class get_groups extends React.Component {
                         message: "Groups you can join:"
                     }];
                     this.get_elements(response.data.data);
-                    // let current_state={type:insert_data.type, subtype:insert_data.subtype,add_item_id:this.cookies.get("user_uid")};
-                    // this.setState(current_state);
                 }
                 else {
                     alert("Invalid data");

@@ -2,7 +2,6 @@ import React from 'react';
 import registerServiceWorker from './registerServiceWorker'
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { Title, List } from './components/App';
 import get_groups from './components/get_groups'
 import register from './components/register'
 import login from './components/login'

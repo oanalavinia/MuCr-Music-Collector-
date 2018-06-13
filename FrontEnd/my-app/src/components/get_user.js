@@ -18,17 +18,20 @@ export default class get_user extends React.Component {
             artistName:"Artist",
             albumName:"Album",
             diameter: "Diameter (inch)",
-            rotationaSpeed: "Rotational speerd(rpm)",
+            rotationaSpeed: "Rotational speed(rpm)",
             nrChanels:"Number of audio channels",
             weight:"Weight(G)",
             seniority:"Seniority",
             quality:"Quality",
             mbid:"Music brainz info",
+            format:"Format",
+            gender:"Gender",
+            artists:"Artists",
+            year:"Year",
+            city:"City",
 			Actions:"Actions"
         };
         this.change_params = this.change_params.bind(this);
-
-
     }
 
     change_params(query, e) {
@@ -51,8 +54,6 @@ export default class get_user extends React.Component {
                     ok = false;
 
             return ok;
-
-
         });
         this.generate_table(current_item);
     }
@@ -70,14 +71,12 @@ export default class get_user extends React.Component {
 
         axios.post(data.url, data.body)
             .then((response) => {
-                alert(JSON.stringify(response.data));
                 if (response.data.code && response.data.code === 1000) {
                     this.componentDidMount();
                 }
                 else {
                     alert("Invalid data");
                 }
-
             })
             .catch((error) => {
                 console.log(error);
@@ -99,7 +98,6 @@ export default class get_user extends React.Component {
             <th>{this.db_asoc[item]}</th>
         );
 		
-		alert(JSON.stringify(disc[0]));
         let listItems = disc.map((item) =>
             <tr>
                 {

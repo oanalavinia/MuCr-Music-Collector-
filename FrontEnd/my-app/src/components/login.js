@@ -9,11 +9,9 @@ export default class NameForm extends React.Component {
         super(props);
         this.state = {email: '', pass: '', raspLogin: 0};
 
-
         this.handleChangePass = this.handleChangePass.bind(this);
         this.handleChangeEmail = this.handleChangeEmail.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-
     }
 
     handleChangeEmail(event) {
@@ -42,20 +40,15 @@ export default class NameForm extends React.Component {
         axios.post(data.url, data.body)
             .then((response) => {
                 console.log(response);
-                alert(JSON.stringify(response.data));
                 if (response.data.token && response.data.token !== undefined) {
                     this.setState({email: this.state.email, pass: this.state.pass, raspLogin: 1, user_uid:response.data.user_uid});
-                    alert("Login cu succes");
                     const cookies = new Cookies();
                     cookies.set('token', response.data.token, {path: '/'});
                     cookies.set("user_uid",response.data.user_uid,{path:'/'});
-                    //this.props.history.push("/getUser/a005b9cbc2f9d53d4db23b77715e11e1");
-                    //return <Redirect to='/getUser/a005b9cbc2f9d53d4db23b77715e11e1'  />
                 }
                 else {
                     alert("Invalid login");
                 }
-
             })
             .catch((error) => {
                 console.log(error);
