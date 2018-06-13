@@ -48,7 +48,7 @@ export default class get_user extends React.Component {
             if (query.artist && query.artist !== undefined)
                 if (disc['data']['artistName'].indexOf(query.artist) < 0)
                     ok = false;
-            if (query.type === "collections") {
+            if (disc.type === "collections") {
                 if (query.album && query.album !== undefined)
                     if (disc['data']['albumName'].indexOf(query.album) < 0)
                         ok = false;
@@ -188,6 +188,11 @@ export default class get_user extends React.Component {
             </div>)
         };
 
+        let second = {
+            "collections": "Album",
+            "concerts": "Format"
+        };
+
         return (<div><h2>Search in {type}</h2>
 
             <p className="search-p">Type</p>
@@ -198,7 +203,7 @@ export default class get_user extends React.Component {
                 <input type="text" value={this.params.artist} onChange={(e) => this.handleChange_artist(e)}/>
             </div>
 
-            <p className="search-p">Album</p>
+            <p className="search-p">{second[type]}</p>
             <div className="search-box">
                 <input type="text" value={this.params.album} onChange={(e) => this.handleChange_album(e)}/>
             </div>
